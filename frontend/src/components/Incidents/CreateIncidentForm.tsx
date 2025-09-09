@@ -6,7 +6,8 @@ import { Input } from '@/components/Input'
 import { Select } from '../Select'
 import { Button } from '../ui/button'
 import { Textarea } from '../Textarea'
-import { acceptedImageTypes, MAX_IMAGE_SIZE } from '@/lib/images'
+import { acceptedImageTypes, imageToBase64, MAX_IMAGE_SIZE } from '@/lib/images'
+import { useCreateIncident } from '@/hooks/incidents'
 
 const INCIDENT_TYPES_OPTIONS = [
   { value: 'WILDFIRE', label: 'Wildfire' },
@@ -34,24 +35,24 @@ const createIncidentSchema = z.object({
 type CreateIncidentFormData = z.infer<typeof createIncidentSchema>
 
 export function CreateIncidentForm() {
+  const { mutate, isPending } = useCreateIncident()
+
   const form = useForm<CreateIncidentFormData>({
     defaultValues: {
       title: '',
       incidentType: undefined,
       description: '',
       location: '',
-      image: null
+      image: undefined
     },
     resolver: zodResolver(createIncidentSchema)
   })
 
-  const onSubmit = (data: CreateIncidentFormData) => {
-    console.log(data)
+  const onSubmit = async (data: CreateIncidentFormData) => {
+    const image = data.image ? await imageToBase64(data.image) : undefined
+    mutate({ ...data, image })
+    form.reset()
   }
-
-  const x = form.watch()
-
-  console.log(x)
 
   return (
     <Form {...form}>
@@ -129,6 +130,7 @@ export function CreateIncidentForm() {
         />
 
         <Button
+          disabled={isPending}
           className='w-full mt-6'
           type='submit'
         >

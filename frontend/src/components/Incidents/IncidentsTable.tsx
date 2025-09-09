@@ -12,8 +12,8 @@ import { Badge } from '../ui/badge'
 import { useGetIncidents } from '@/hooks/incidents'
 
 export function IncidentsTable() {
-  const { data } = useGetIncidents()
-  const incidents = data?.data.data ?? []
+  const { data: response } = useGetIncidents()
+  const incidents = response?.data.data ?? []
 
   const badgeRenderer = {
     WILDFIRE: <Badge variant='default'>Wildfire</Badge>,

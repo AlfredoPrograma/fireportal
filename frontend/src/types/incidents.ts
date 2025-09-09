@@ -15,5 +15,5 @@ export type CreateIncidentPayload = {
   incidentType: IncidentType
   description?: string
   location?: string
-  image?: string
+  image?: string 
 }

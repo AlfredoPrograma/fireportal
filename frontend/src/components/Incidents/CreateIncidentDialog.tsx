@@ -1,21 +1,16 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger
-} from '@/components/ui/dialog'
-import { DialogTitle } from '@radix-ui/react-dialog'
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
+import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog'
 import { CreateIncidentForm } from './CreateIncidentForm'
+import type { ReactNode } from 'react'
 
 type CreateIncidentModalProps = {
-  trigger: React.ReactNode
+  trigger: ReactNode
 }
 
 export function CreateIncidentDialog({ trigger }: CreateIncidentModalProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Create new incident</DialogTitle>
