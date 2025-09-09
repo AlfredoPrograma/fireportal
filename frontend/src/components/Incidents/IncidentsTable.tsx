@@ -12,6 +12,7 @@ import { Badge } from '../ui/badge'
 import { useGetIncidents } from '@/hooks/incidents'
 import { LoadingSpinner } from '../LoadingSpinner'
 import { ErrorAlert } from '../ErrorAlert'
+import { dateFormatter } from '@/lib/dates'
 
 export function IncidentsTable() {
   const { data: response, isLoading, isError, isSuccess } = useGetIncidents()
@@ -38,6 +39,7 @@ export function IncidentsTable() {
               <TableHead className='text-lg font-bold'>Description</TableHead>
               <TableHead className='text-lg font-bold'>Type</TableHead>
               <TableHead className='text-lg font-bold'>Location</TableHead>
+              <TableHead className='text-lg font-bold'>Created at</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -45,7 +47,7 @@ export function IncidentsTable() {
             {incidents.length === 0 && (
               <TableRow>
                 <TableCell
-                  colSpan={5}
+                  colSpan={6}
                   className='text-center'
                 >
                   No incidents found.
@@ -66,9 +68,16 @@ export function IncidentsTable() {
                   />
                 </TableCell>
                 <TableCell className='font-medium'>{incident.title}</TableCell>
-                <TableCell>{incident.description}</TableCell>
+                <TableCell className='max-w-xs truncate'>
+                  {incident.description}
+                </TableCell>
                 <TableCell>{badgeRenderer[incident.incidentType]}</TableCell>
-                <TableCell>{incident.location}</TableCell>
+                <TableCell className='max-w-xs truncate'>
+                  {incident.location}
+                </TableCell>
+                <TableCell>
+                  {dateFormatter.format(new Date(incident.createdAt))}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -43,7 +43,7 @@ func (r repository) CreateIncident(ctx context.Context, data CreateIncidentDTO) 
 
 func (r repository) GetIncidents(ctx context.Context) ([]Incident, error) {
 	var incidents []Incident
-	query := `SELECT id, title, incident_type, description, location, image, created_at FROM incidents ORDER BY created_at;`
+	query := `SELECT id, title, incident_type, description, location, image, created_at FROM incidents ORDER BY created_at DESC;`
 	rows, err := r.db.QueryContext(ctx, query)
 
 	if err != nil {
