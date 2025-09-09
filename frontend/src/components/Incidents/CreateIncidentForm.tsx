@@ -8,6 +8,7 @@ import { Button } from '../ui/button'
 import { Textarea } from '../Textarea'
 import { acceptedImageTypes, imageToBase64, MAX_IMAGE_SIZE } from '@/lib/images'
 import { useCreateIncident } from '@/hooks/incidents'
+import { useRef } from 'react'
 
 const INCIDENT_TYPES_OPTIONS = [
   { value: 'WILDFIRE', label: 'Wildfire' },
@@ -36,11 +37,12 @@ type CreateIncidentFormData = z.infer<typeof createIncidentSchema>
 
 export function CreateIncidentForm() {
   const { mutate, isPending } = useCreateIncident()
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const form = useForm<CreateIncidentFormData>({
-    defaultValues: {
+    values: {
       title: '',
-      incidentType: undefined,
+      incidentType: 'WILDFIRE',
       description: '',
       location: '',
       image: undefined
@@ -48,9 +50,13 @@ export function CreateIncidentForm() {
     resolver: zodResolver(createIncidentSchema)
   })
 
+  const f = form.watch()
+  console.log(f)
+
   const onSubmit = async (data: CreateIncidentFormData) => {
     const image = data.image ? await imageToBase64(data.image) : undefined
     mutate({ ...data, image })
+    fileInputRef.current!.value = '' // Reset file input manually since it's uncontrolled
     form.reset()
   }
 
@@ -114,6 +120,7 @@ export function CreateIncidentForm() {
           render={({ field }) => {
             return (
               <Input
+                ref={fileInputRef}
                 value={undefined} // Prevents controlled to uncontrolled warning
                 field={field}
                 accept={acceptedImageTypes.join(',')}

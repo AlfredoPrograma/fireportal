@@ -13,7 +13,9 @@ export function CreateIncidentDialog({ trigger }: CreateIncidentModalProps) {
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create new incident</DialogTitle>
+          <DialogTitle className='text-xl font-bold'>
+            Create new incident
+          </DialogTitle>
         </DialogHeader>
 
         <CreateIncidentForm />
