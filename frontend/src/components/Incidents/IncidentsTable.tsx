@@ -48,9 +48,9 @@ export function IncidentsTable() {
               <TableRow>
                 <TableCell
                   colSpan={6}
-                  className='text-center'
+                  className='text-center text-2xl font-bold py-8'
                 >
-                  No incidents found.
+                  No incidents found
                 </TableCell>
               </TableRow>
             )}

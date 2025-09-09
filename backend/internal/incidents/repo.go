@@ -49,7 +49,7 @@ func (r repository) GetIncidents(ctx context.Context) ([]Incident, error) {
 	if err != nil {
 		log.Printf("%s: get incidents query failed\n", repoLoggerName)
 		log.Println(err)
-		return nil, err
+		return incidents, err
 	}
 
 	for rows.Next() {
@@ -66,7 +66,7 @@ func (r repository) GetIncidents(ctx context.Context) ([]Incident, error) {
 		); err != nil {
 			log.Printf("%s: scanning rows failed\n", repoLoggerName)
 			log.Println(err)
-			return nil, err
+			return incidents, err
 		}
 
 		incidents = append(incidents, incident)
