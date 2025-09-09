@@ -18,13 +18,13 @@ type Incident struct {
 	Description  *string      `json:"description,omitempty"`
 	Location     *string      `json:"location,omitempty"`
 	Image        *string      `json:"image,omitempty"`
-	IncidentType IncidentType `json:"incident_type"`
-	CreatedAt    time.Time    `json:"created_at"`
+	IncidentType IncidentType `json:"incidentType"`
+	CreatedAt    time.Time    `json:"createdAt"`
 }
 
 type CreateIncidentDTO struct {
 	Title        string       `json:"title"`
-	IncidentType IncidentType `json:"incident_type"`
+	IncidentType IncidentType `json:"incidentType"`
 	Description  string       `json:"description"`
 	Location     string       `json:"location"`
 	Image        string       `json:"image"`

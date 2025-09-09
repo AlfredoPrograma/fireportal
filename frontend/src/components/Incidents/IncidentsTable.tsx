@@ -1,4 +1,4 @@
-import type { Incident, IncidentType } from '@/types/incidents'
+import type { IncidentType } from '@/types/incidents'
 import {
   Table,
   TableBody,
@@ -9,35 +9,12 @@ import {
 } from '@/components/ui/table'
 import type { ReactNode } from 'react'
 import { Badge } from '../ui/badge'
-
-const incidents: Incident[] = [
-  {
-    title: 'Forest Fire near Lakeview',
-    incidentType: 'WILDFIRE',
-    description: 'A wildfire spreading rapidly near the lake.',
-    location: 'Lakeview National Park',
-    id: 1,
-    createdAt: new Date()
-  },
-  {
-    title: 'Warehouse Blaze',
-    incidentType: 'STRUCTURE_FIRE',
-    description: 'Fire broke out in an industrial warehouse.',
-    location: 'Downtown Industrial Area',
-    id: 2,
-    createdAt: new Date()
-  },
-  {
-    title: 'Small Brush Fire',
-    incidentType: 'OTHER',
-    description: 'Minor brush fire contained quickly.',
-    location: 'Hillside Avenue',
-    id: 3,
-    createdAt: new Date()
-  }
-]
+import { useGetIncidents } from '@/hooks/incidents'
 
 export function IncidentsTable() {
+  const { data } = useGetIncidents()
+  const incidents = data?.data.data ?? []
+
   const badgeRenderer = {
     WILDFIRE: <Badge variant='default'>Wildfire</Badge>,
     STRUCTURE_FIRE: <Badge variant='secondary'>Structure Fire</Badge>,

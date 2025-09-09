@@ -10,3 +10,11 @@ import axios from "axios";
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1',
 })
+
+/**
+ * Represents a generic API response structure.
+ *
+ */
+export type ApiResponse<T> = {
+  data: T;
+}; 

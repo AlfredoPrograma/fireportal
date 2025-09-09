@@ -9,3 +9,11 @@ export type Incident = {
   location?: string
   image?: string
 }
+
+export type CreateIncidentPayload = {
+  title: string
+  incidentType: IncidentType
+  description?: string
+  location?: string
+  image?: string
+}
