@@ -28,3 +28,7 @@ Desktop.ini
 # Coverage / Testing
 coverage/
 lcov.info
+
+# Databases
+*.db
+*.sqlite

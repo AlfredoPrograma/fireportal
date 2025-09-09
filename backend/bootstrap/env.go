@@ -10,6 +10,8 @@ import (
 type Env struct {
 	ApiPort            int    `mapstructure:"API_PORT"`
 	DbConnectionString string `mapstructure:"DB_CONNECTION_STRING"`
+	DbDriver           string `mapstructure:"DB_DRIVER"`
+	MigrationsFolder   string `mapstructure:"MIGRATIONS_FOLDER"`
 }
 
 // LoadEnv loads environment variables from a .env file using Viper,
