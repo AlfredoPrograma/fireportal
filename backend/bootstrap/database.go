@@ -3,6 +3,8 @@ package bootstrap
 import (
 	"database/sql"
 	"log"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func ConnectDB(driver string, connString string) *sql.DB {

@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 
 	"github.com/alfredoprograma/fireportal/bootstrap"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 // main is the entry point of the migration runner application.

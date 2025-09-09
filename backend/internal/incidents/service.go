@@ -10,6 +10,7 @@ type Service interface {
 }
 
 type service struct {
+	incidentsRepo Repository
 }
 
 func (i service) CreateIncident(ctx context.Context, data CreateIncidentDTO) error {
@@ -17,9 +18,9 @@ func (i service) CreateIncident(ctx context.Context, data CreateIncidentDTO) err
 }
 
 func (i service) GetIncidents(ctx context.Context) ([]Incident, error) {
-	panic("unimplemented")
+	return i.incidentsRepo.GetIncidents(ctx)
 }
 
-func NewService() Service {
-	return service{}
+func NewService(incidentsRepo Repository) Service {
+	return service{incidentsRepo: incidentsRepo}
 }

@@ -3,6 +3,7 @@ package incidents
 import (
 	"net/http"
 
+	"github.com/alfredoprograma/fireportal/internal/httputils"
 	"github.com/labstack/echo/v4"
 )
 
@@ -26,7 +27,9 @@ func (ctrl controller) GetIncidents(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, incidents)
+	return c.JSON(http.StatusOK, httputils.APIResponse[[]Incident]{
+		Data: incidents,
+	})
 }
 
 func NewController(incidentsService Service) Controller {
