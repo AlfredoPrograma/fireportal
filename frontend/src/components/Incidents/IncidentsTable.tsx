@@ -1,4 +1,4 @@
-import type { Incident } from '@/types/incidents'
+import type { Incident, IncidentType } from '@/types/incidents'
 import {
   Table,
   TableBody,
@@ -7,8 +7,8 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import { PencilIcon, TrashIcon } from 'lucide-react'
+import type { ReactNode } from 'react'
+import { Badge } from '../ui/badge'
 
 const incidents: Incident[] = [
   {
@@ -41,6 +41,12 @@ const incidents: Incident[] = [
 ]
 
 export function IncidentsTable() {
+  const badgeRenderer = {
+    WILDFIRE: <Badge variant='default'>Wildfire</Badge>,
+    STRUCTURE_FIRE: <Badge variant='secondary'>Structure Fire</Badge>,
+    OTHER: <Badge variant='outline'>Other</Badge>
+  } satisfies Record<IncidentType, ReactNode>
+
   return (
     <Table>
       <TableHeader>
@@ -49,7 +55,6 @@ export function IncidentsTable() {
           <TableHead>Description</TableHead>
           <TableHead>Type</TableHead>
           <TableHead>Location</TableHead>
-          <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
 
@@ -58,24 +63,8 @@ export function IncidentsTable() {
           <TableRow key={incident.id}>
             <TableCell className='font-medium'>{incident.title}</TableCell>
             <TableCell>{incident.description}</TableCell>
-            <TableCell>{incident.incidentType}</TableCell>
+            <TableCell>{badgeRenderer[incident.incidentType]}</TableCell>
             <TableCell>{incident.location}</TableCell>
-            <TableCell className='space-x-4'>
-              <Button
-                variant='outline'
-                size='icon'
-                className='size-8'
-              >
-                <PencilIcon />
-              </Button>
-              <Button
-                variant='default'
-                size='icon'
-                className='size-8'
-              >
-                <TrashIcon />
-              </Button>
-            </TableCell>
           </TableRow>
         ))}
       </TableBody>
