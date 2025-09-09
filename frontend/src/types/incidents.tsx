@@ -4,6 +4,7 @@ export type Incident = {
   id: number
   title: string
   incidentType: IncidentType
+  createdAt: Date
   description?: string
   location?: string
   image?: string

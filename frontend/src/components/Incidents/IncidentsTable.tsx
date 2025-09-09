@@ -17,7 +17,8 @@ const incidents: Incident[] = [
     description: 'A wildfire spreading rapidly near the lake.',
     location: 'Lakeview National Park',
     image: 'wildfire1.jpg',
-    id: 1
+    id: 1,
+    createdAt: new Date()
   },
   {
     title: 'Warehouse Blaze',
@@ -25,7 +26,8 @@ const incidents: Incident[] = [
     description: 'Fire broke out in an industrial warehouse.',
     location: 'Downtown Industrial Area',
     image: 'structurefire1.jpg',
-    id: 2
+    id: 2,
+    createdAt: new Date()
   },
   {
     title: 'Small Brush Fire',
@@ -33,56 +35,50 @@ const incidents: Incident[] = [
     description: 'Minor brush fire contained quickly.',
     location: 'Hillside Avenue',
     image: 'brushfire1.jpg',
-    id: 3
+    id: 3,
+    createdAt: new Date()
   }
 ]
 
 export function IncidentsTable() {
   return (
-    <section className='space-y-6'>
-      <div className='flex justify-between items-center'>
-        <h2 className='text-2xl font-bold'>Incidents</h2>
-        <Button variant='default'>Add Incident</Button>
-      </div>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Title</TableHead>
+          <TableHead>Description</TableHead>
+          <TableHead>Type</TableHead>
+          <TableHead>Location</TableHead>
+          <TableHead>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Type</TableHead>
-            <TableHead>Location</TableHead>
-            <TableHead>Actions</TableHead>
+      <TableBody>
+        {incidents.map((incident) => (
+          <TableRow key={incident.id}>
+            <TableCell className='font-medium'>{incident.title}</TableCell>
+            <TableCell>{incident.description}</TableCell>
+            <TableCell>{incident.incidentType}</TableCell>
+            <TableCell>{incident.location}</TableCell>
+            <TableCell className='space-x-4'>
+              <Button
+                variant='outline'
+                size='icon'
+                className='size-8'
+              >
+                <PencilIcon />
+              </Button>
+              <Button
+                variant='default'
+                size='icon'
+                className='size-8'
+              >
+                <TrashIcon />
+              </Button>
+            </TableCell>
           </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {incidents.map((incident) => (
-            <TableRow key={incident.id}>
-              <TableCell className='font-medium'>{incident.title}</TableCell>
-              <TableCell>{incident.description}</TableCell>
-              <TableCell>{incident.incidentType}</TableCell>
-              <TableCell>{incident.location}</TableCell>
-              <TableCell className='space-x-4'>
-                <Button
-                  variant='outline'
-                  size='icon'
-                  className='size-8'
-                >
-                  <PencilIcon />
-                </Button>
-                <Button
-                  variant='default'
-                  size='icon'
-                  className='size-8'
-                >
-                  <TrashIcon />
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </section>
+        ))}
+      </TableBody>
+    </Table>
   )
 }
