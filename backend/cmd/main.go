@@ -1,7 +1,8 @@
 package main
 
-import "fmt"
+import "github.com/alfredoprograma/fireportal/bootstrap"
 
 func main() {
-	fmt.Println("Hello world")
+	bootstrap.LoadEnv()
+
 }
