@@ -18,12 +18,15 @@ func main() {
 	incidentsController := incidents.NewController(incidentsService)
 
 	e := echo.New()
+
 	e.Use(middleware.AddTrailingSlash())
+	e.Use(middleware.CORS())
 
 	apiGroup := e.Group("/api/v1")
 	incidentsGroup := apiGroup.Group("/incidents")
 
 	incidentsGroup.GET("", incidentsController.GetIncidents)
+	incidentsGroup.POST("", incidentsController.CreateIncident)
 
 	e.Logger.Fatal(
 		e.Start(fmt.Sprintf(":%d", env.ApiPort)),

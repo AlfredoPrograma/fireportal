@@ -14,7 +14,7 @@ type service struct {
 }
 
 func (i service) CreateIncident(ctx context.Context, data CreateIncidentDTO) error {
-	panic("unimplemented")
+	return i.incidentsRepo.CreateIncident(ctx, data)
 }
 
 func (i service) GetIncidents(ctx context.Context) ([]Incident, error) {

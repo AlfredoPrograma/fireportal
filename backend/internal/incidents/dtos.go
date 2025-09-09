@@ -1,6 +1,8 @@
 package incidents
 
-import "time"
+import (
+	"time"
+)
 
 type IncidentType string
 
@@ -13,17 +15,17 @@ const (
 type Incident struct {
 	Id           int          `json:"id"`
 	Title        string       `json:"title"`
-	Description  string       `json:"description"`
-	Location     string       `json:"location"`
-	Image        string       `json:"image"`
+	Description  *string      `json:"description,omitempty"`
+	Location     *string      `json:"location,omitempty"`
+	Image        *string      `json:"image,omitempty"`
 	IncidentType IncidentType `json:"incident_type"`
 	CreatedAt    time.Time    `json:"created_at"`
 }
 
 type CreateIncidentDTO struct {
 	Title        string       `json:"title"`
+	IncidentType IncidentType `json:"incident_type"`
 	Description  string       `json:"description"`
 	Location     string       `json:"location"`
 	Image        string       `json:"image"`
-	IncidentType IncidentType `json:"incident_type"`
 }

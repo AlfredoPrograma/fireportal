@@ -4,9 +4,11 @@ import (
 	"context"
 	"database/sql"
 	"log"
+
+	"github.com/alfredoprograma/fireportal/internal/dbutils"
 )
 
-const repoLoggerName = "[INCIDENTS_REPO]"
+const repoLoggerName = "[INCIDENTS REPO]"
 
 type Repository interface {
 	GetIncidents(ctx context.Context) ([]Incident, error)
@@ -18,7 +20,25 @@ type repository struct {
 }
 
 func (r repository) CreateIncident(ctx context.Context, data CreateIncidentDTO) error {
-	panic("unimplemented")
+	query := `INSERT INTO incidents (title, incident_type, description, location, image) VALUES (?, ?, ?, ?, ?);`
+
+	_, err := r.db.ExecContext(
+		ctx,
+		query,
+		data.Title,
+		data.IncidentType,
+		dbutils.NullString(data.Description),
+		dbutils.NullString(data.Location),
+		dbutils.NullString(data.Image),
+	)
+
+	if err != nil {
+		log.Printf("%s: create incident query failed\n", repoLoggerName)
+		log.Println(err)
+		return err
+	}
+
+	return nil
 }
 
 func (r repository) GetIncidents(ctx context.Context) ([]Incident, error) {
