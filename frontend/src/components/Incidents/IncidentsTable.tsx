@@ -16,7 +16,6 @@ const incidents: Incident[] = [
     incidentType: 'WILDFIRE',
     description: 'A wildfire spreading rapidly near the lake.',
     location: 'Lakeview National Park',
-    image: 'wildfire1.jpg',
     id: 1,
     createdAt: new Date()
   },
@@ -25,7 +24,6 @@ const incidents: Incident[] = [
     incidentType: 'STRUCTURE_FIRE',
     description: 'Fire broke out in an industrial warehouse.',
     location: 'Downtown Industrial Area',
-    image: 'structurefire1.jpg',
     id: 2,
     createdAt: new Date()
   },
@@ -34,7 +32,6 @@ const incidents: Incident[] = [
     incidentType: 'OTHER',
     description: 'Minor brush fire contained quickly.',
     location: 'Hillside Avenue',
-    image: 'brushfire1.jpg',
     id: 3,
     createdAt: new Date()
   }
@@ -51,6 +48,7 @@ export function IncidentsTable() {
     <Table>
       <TableHeader>
         <TableRow>
+          <TableHead></TableHead>
           <TableHead>Title</TableHead>
           <TableHead>Description</TableHead>
           <TableHead>Type</TableHead>
@@ -61,6 +59,16 @@ export function IncidentsTable() {
       <TableBody>
         {incidents.map((incident) => (
           <TableRow key={incident.id}>
+            <TableCell>
+              <img
+                src={
+                  incident.image ??
+                  'https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg'
+                }
+                alt={incident.title}
+                className='w-16 h-16 object-cover'
+              />
+            </TableCell>
             <TableCell className='font-medium'>{incident.title}</TableCell>
             <TableCell>{incident.description}</TableCell>
             <TableCell>{badgeRenderer[incident.incidentType]}</TableCell>
