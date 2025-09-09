@@ -85,3 +85,11 @@ Potential improvements include:
 ## AI usage
 
 I used AI tools for this project, specifically ChatGPT-5 and GitHub Copilot. AI support was mainly used for researching database management with Go’s `database/sql` package (I usually use SQLC, which removes boilerplate). GitHub Copilot also helped generate stub data based on the `Incident` shape for faster UI development, and to scaffold some backend endpoints.
+
+## Videos & Screenshots
+
+- [Fireportal App Overview](https://www.loom.com/share/8706c8dc5379447cbefdb92ab9e1617b?sid=6807735e-cb9a-45d8-8ec8-02c480b57292)
+- [Development environment configuring](https://www.loom.com/share/44e02728d99a4207b0e5245b27df8aab?sid=3378c485-bc34-4671-8eff-b6abf52a46f8)
+
+<img width="1899" height="1116" alt="image" src="https://github.com/user-attachments/assets/95a5eb5e-f568-4970-9778-3eea55a126be" />
+
